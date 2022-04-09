@@ -1,7 +1,8 @@
 import React from 'react'
 
 function Movieform() {
-
+  
+ 
   return (
     <section>
       <div className='card pa-30'>
