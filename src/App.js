@@ -10,16 +10,16 @@ const title = 'Favorite Movie Directory'
 function App() {
   const [movies, setMovies] =  useState([
     {
-      name: "John Cage",
+      name: "Nightwolf",
       rating: "90",
       duration: "19"
     },
     {
-      name: "Game of Throne",
+      name: "Sage",
       rating: "50",
       duration: ""
     }, {
-      name: "John Cage",
+      name: "Spartacus",
       rating: "90",
       duration: "19"
     }

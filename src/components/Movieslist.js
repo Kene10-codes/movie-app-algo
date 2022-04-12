@@ -28,7 +28,7 @@ function Movieslist() {
       >
           <div className='layout-column w-40'>    
              <h3 className='my-3'>{`${movie.name}`}</h3>
-             <p className='my-0 text-sm'>{`Rating: ${movie.rating} / 100`}</p>
+             <p className='my-0'>{`Rating: ${movie.rating} / 100`}</p>
           </div>
           <div className='layout-row my-auto mr-20'>
             <p className='justify-content-end'>{`${movie.duration} Hrs`}</p>
