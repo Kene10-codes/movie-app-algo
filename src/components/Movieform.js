@@ -1,41 +1,30 @@
 import React from 'react'
-import { useState } from 'react'
+import { useRef, useContext } from 'react'
+import { AppContext } from './useContext'
 
-function Movieform({allMovies}) {
-  const [movieData, setMovieData] = useState([{
-    name: "",
-    rating: "",
-    duration: ""
-  }])
+function Movieform({handler}) {
+  const { addMovie } = useContext(AppContext)
 
-  const [error, setError] = useState("")
-  
+  const movieName = useRef(null)
+  const movieDuration = useRef(null)
+  const movieRating = useRef(null)
 
-  function handleMovie(e){
-    const { name, value } = e.target
-    setMovieData(prev => {
-         return {
-           ...prev,
-           [name]: value
-         }
 
-    })
-  }
-
-function handleSubmit(e) {
+function handleAddMovie(e) {
   e.preventDefault()
-  let NewMovies = []
-  NewMovies.push(movieData)
-  allMovies.concat(NewMovies)
 
-
+   const name = movieName.current.value
+   const rating =  movieRating.current.value
+   const duration = movieDuration.current.value
+   const newMovie = {name, rating, duration}
+   addMovie(newMovie)
 }
 
  
   return (
     <section>
       <div className='card pa-30'>
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className='layout-column mb-15'>
             <label htmlFor='name' className='mb-3'>Movie Name</label>
             <input 
@@ -43,9 +32,7 @@ function handleSubmit(e) {
               id='name'
               placeholder='Enter Movie Name'
               data-testid='nameInput'
-              name="name"
-              value={movieData.name}
-              onChange={handleMovie}
+              ref={movieName}
             />
           </div>
           <div className='layout-column mb-15'>
@@ -55,9 +42,7 @@ function handleSubmit(e) {
               id='ratings'
               placeholder='Enter Rating on a scale of 1 to 100'
               data-testid='ratingsInput'
-              name="rating"
-              value={movieData.rating}
-              onChange={handleMovie}
+              ref={movieRating}
             />
           </div>
           <div className='layout-column mb-30'>
@@ -67,9 +52,7 @@ function handleSubmit(e) {
               id='duration'
               placeholder='Enter duration in hours or minutes'
               data-testid='durationInput'
-              name="duration"
-              value={movieData.duration}
-              onChange={handleMovie}
+              ref={movieDuration}
             />
           </div>
           {/* Use this div when time format is invalid */}
@@ -84,6 +67,7 @@ function handleSubmit(e) {
               type='submit'
               className='mx-0'
               data-testid='addButton'
+              onClick={handleAddMovie}
             >
               Add Movie
             </button>

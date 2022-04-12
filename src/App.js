@@ -1,15 +1,46 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './App.css'
 import 'h8k-components'
+import { AppContext } from './components/useContext'
 
 import { Movieform, Movieslist, Search } from './components'
 
 const title = 'Favorite Movie Directory'
 
 function App() {
+  const [movies, setMovies] =  useState([
+    {
+      name: "John Cage",
+      rating: "90",
+      duration: "19"
+    },
+    {
+      name: "Game of Throne",
+      rating: "50",
+      duration: ""
+    }, {
+      name: "John Cage",
+      rating: "90",
+      duration: "19"
+    }
+  ])
+
+  const [filterMovies, setFilterMovies] = useState(movies)
+  
+  function addMovie(film) {
+    setFilterMovies(prev => [...prev, film])
+  }
+  const [searchTerm, setSearchTerm ] = useState("")
 
   return (
-    <div>
+    <AppContext.Provider value={{ 
+      searchTerm, 
+      setSearchTerm, 
+      addMovie, 
+      filterMovies, 
+      setFilterMovies, 
+      setMovies 
+      }}>
       <h8k-navbar header={ title } />
       <div className='layout-row justify-content-center mt-100'>
         <div className='w-30 mr-75'>
@@ -23,7 +54,7 @@ function App() {
           </div>
         </div>
       </div> 
-    </div>
+    </AppContext.Provider>
   )
 }
 
